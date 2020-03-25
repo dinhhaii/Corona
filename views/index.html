@@ -4,28 +4,30 @@
   <div class="row mb-3">
     <div class="col-sm-12">
       <a href="https://vi.wikipedia.org/wiki/B%E1%BB%87nh_virus_corona_2019" class="btn btn-danger">Coronavirus (COVID-19)</a>
-      <a href="https://code.junookyo.xyz/api/ncov-moh/data.json" class="btn btn-success">API</a>
-      <a href="#" class="btn btn-primary">12.05</a>
+      <a href="https://code.junookyo.xyz/api/ncov-moh/data.json" class="btn btn-success">API 1</a>
+      <a href="https://ncov-data.herokuapp.com/api/corona" class="btn btn-dark">API 2</a>
 
     </div>
   </div>
-  <div class="row">
+  
+  <div class="row mb-3">
     <div class="col-sm-6">
       <div class="card bg-light">
         <div class="card-body">
-          <h3 class="card-title">Thế giới</h3>
+          <h3 class="card-title">Global</h3>
+          <h5> <strong>Updated</strong> {{ coronaData.data.global.update }}</h5>
           <table class="table">
             <tbody>
               <tr>
-                <th scope="row">Số ca:</th>
-                <td>{{coronaData.data.global.cases}}</td>
+                <th scope="row">Cases:</th>
+                <td>{{coronaData.data.global.confirmed}}</td>
               </tr>
               <tr>
-                <th scope="row">Tử vong:</th>
+                <th scope="row">Death:</th>
                 <td>{{coronaData.data.global.deaths}}</td>
               </tr>
               <tr>
-                <th scope="row">Chữa khỏi:</th>
+                <th scope="row">Recovered:</th>
                 <td>{{coronaData.data.global.recovered}}</td>
               </tr>
             </tbody>
@@ -37,18 +39,19 @@
       <div class="card text-white bg-dark">
         <div class="card-body">
           <h3 class="card-title">Việt Nam</h3>
+          <h5> <strong>Updated</strong> {{ coronaData.data.vietnam.update }}</h5>
           <table class="table table-dark">
             <tbody>
               <tr>
-                <th scope="row">Số ca:</th>
-                <td>{{coronaData.data.vietnam.cases}}</td>
+                <th scope="row">Cases:</th>
+                <td>{{coronaData.data.vietnam.confirmed}}</td>
               </tr>
               <tr>
-                <th scope="row">Tử vong:</th>
+                <th scope="row">Death:</th>
                 <td>{{coronaData.data.vietnam.deaths}}</td>
               </tr>
               <tr>
-                <th scope="row">Chữa khỏi:</th>
+                <th scope="row">Recovered:</th>
                 <td>{{coronaData.data.vietnam.recovered}}</td>
               </tr>
             </tbody>
@@ -56,5 +59,41 @@
         </div>
       </div>
     </div>
+  </div>
+    <div class="row mb-3">
+      <div class="col-sm-12">
+        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+          <div class="d-flex w-100 justify-content-between">
+            <h4 class="mb-1">Thống kê</h4>
+            <small> Updated </small>
+          </div>
+  
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Province/City</th>
+                <th>Cases</th>
+                <th>Deaths</th>
+                <th>Recovered</th>
+                <th>Update</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each coronaData.data.vietnam.list }}
+              <tr>
+                <th scope="row">{{name}} {{#if latest.isNew }} <span class="badge badge-danger">New update</span> {{/if}}</th>
+                <td>{{confirmed}}</td>
+                <td>{{deaths}}</td>
+                <td>{{recovered}}</td>
+                <td>{{update}}</td>
+                <td>{{#if latest.isNew }} {{latest.time}} {{/if}}</td>
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+  
+          <small></small>
+      </div>
   </div>
 </div>
