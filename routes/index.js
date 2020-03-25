@@ -3,7 +3,9 @@ var axios = require('axios');
 var router = express.Router();
 
 const customDateString = date => {
-  return `${date.toISOString().substring(0,10)} ${date.toISOString().substring(11,19)}`; 
+  // return `${date.toISOString().substring(0,10)} ${date.toISOString().substring(11,19)}`; 
+  return `${date.toISOString().substr(0,10)}`;
+
 }
 
 
@@ -35,8 +37,6 @@ router.get('/', function(req, res, next) {
         const date = new Date(element.update * 1000);
         element.update = customDateString(date);
       })
-
-      response.data.data.vietnam.list.forEach(e => console.log(e.latest));
 
       res.render("index", {coronaData: response.data})
     })
